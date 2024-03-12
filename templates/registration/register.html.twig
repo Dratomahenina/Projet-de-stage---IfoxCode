@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+
+
+{% block body %}
+<section>
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>S'inscrire</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.name) }}
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+        {# <div class="eye">
+                <span class="material-symbols-outlined eye-off">visibility_off</span>
+                <span class="material-symbols-outlined eye-on">visibility</span>
+                <span class="displayEye">Afficher le mot de passe</span>
+                <span class="noDisplay">Cacher le mot de passe</span>
+        </div> #}
+        <br>
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'Accepter les conditions d\'utilisations de vos données personnelles'
+        }) }}
+        <a href="{{ path('app_rgpd')}}">RGPD</a>
+
+        <br>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</section>
+{% endblock %}
